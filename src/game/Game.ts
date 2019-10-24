@@ -10,9 +10,9 @@ export class Game {
     }
 
     public start (): void {
-        // this.intervalID = setInterval(() => {
-        //     this.update();
-        // }, this.updateFrequency);
+        this.intervalID = setInterval(() => {
+            this.update();
+        }, this.updateFrequency);
     }
 
     public addPlayer (): void {

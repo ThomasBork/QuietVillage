@@ -8,17 +8,18 @@ export class UIGame extends React.Component<{game: Game}, {players: Player[]}> {
         super(props);
         console.log("Constructing UI");
 
-        //this.state = {players: props.game.players};
+        this.state = {players: props.game.players};
     }
     addPlayer() {
         console.log("Adding player");
         this.props.game.addPlayer();
+        this.setState({players: this.props.game.players});
     }
     render() {
         return (
             <div>
                 <input type="button" value="Add player" onClick={(e) => this.addPlayer()}/>
-                <UIPlayerList players={this.props.game.players}></UIPlayerList>
+                <UIPlayerList players={this.state.players}></UIPlayerList>
             </div>
         );
     }
