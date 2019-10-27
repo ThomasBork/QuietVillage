@@ -3,8 +3,7 @@ import * as ReactDOM from "react-dom";
 
 import { UIGame } from "./components/UIGame";
 import { Game } from "../../game/Game";
-let game = new Game();
-game.addPlayer();
+let game = Game.new();
 
 ReactDOM.render(
     <UIGame game={game} />,

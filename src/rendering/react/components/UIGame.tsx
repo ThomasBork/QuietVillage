@@ -1,25 +1,16 @@
 import * as React from "react";
 import { Game } from "../../../game/Game";
-import { Player } from "../../../game/Player";
-import { UIPlayerList } from "./UIPlayerList";
+import { UIResourceList } from "./UIResourceList";
 
-export class UIGame extends React.Component<{game: Game}, {players: Player[]}> {
+export class UIGame extends React.Component<{game: Game}, {}> {
     constructor (props: {game: Game}) {
         super(props);
-        console.log("Constructing UI");
-
-        this.state = {players: props.game.players};
-    }
-    addPlayer() {
-        console.log("Adding player");
-        this.props.game.addPlayer();
-        this.setState({players: this.props.game.players});
     }
     render() {
         return (
             <div>
-                <input type="button" value="Add player" onClick={(e) => this.addPlayer()}/>
-                <UIPlayerList players={this.state.players}></UIPlayerList>
+                <input type="button" value="Add player" onClick={(e) => console.log("hej")}/>
+                <UIResourceList game={this.props.game}></UIResourceList>
             </div>
         );
     }
