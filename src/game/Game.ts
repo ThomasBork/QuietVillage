@@ -1,7 +1,7 @@
 import { Observable, ObservableFactory } from "../common/Observable";
-import { GameSystem } from "./shared/GameSystem";
 import { ResourceSystem } from "./resources/ResourceSystem";
-import { ResourceType } from "./resources/ResourceType";
+import { WorkerSystem } from "./workers/WorkerSystem";
+import { BuildingSystem } from "./buildings/BuildingSystem";
 
 export class Game {
     private updateFrequency: number = 100;
@@ -12,29 +12,37 @@ export class Game {
     
     private startTimeAsNumber: number;
 
+    public buildingSystem: BuildingSystem;
     public resourceSystem: ResourceSystem;
+    public workerSystem: WorkerSystem;
 
     public onUpdated: Observable = ObservableFactory.create();
 
     public static new(): Game {
         const game = new Game();
         game.init();
-        game.start();
+        game.startNewGame();
         return game;
     }
 
     private constructor () {}
 
     public init (): void {
+        this.buildingSystem = new BuildingSystem(this);
+        this.buildingSystem.init();
+
         this.resourceSystem = new ResourceSystem();
         this.resourceSystem.init();
 
-        this.resourceSystem.getResource(ResourceType.Gold).income.addAdditiveModifier(this, 2);
-        this.resourceSystem.getResource(ResourceType.Wood).income.addAdditiveModifier(this, 5);
+        this.workerSystem = new WorkerSystem(this);
+        this.workerSystem.init();
     }
 
-    public start (): void {
+    public startNewGame (): void {
         this.startTimeAsNumber = Date.now();
+        this.workerSystem.newGame();
+        this.refreshSystemsIsUnlocked();
+        this.resourceSystem.refreshResourcesIsUnlocked();
         this.beginUpdating();
     }
 
@@ -66,5 +74,11 @@ export class Game {
 
     private updateGameSystems (dTime: number): void {        
         this.resourceSystem.update(dTime);
+    }
+
+    private refreshSystemsIsUnlocked() {
+        this.workerSystem.isUnlocked = true;
+        this.resourceSystem.isUnlocked = true;
+        this.buildingSystem.isUnlocked = this.workerSystem.totalWorkerCount.value > 1 || this.workerSystem.idleWorkerCount === 0;
     }
 }
