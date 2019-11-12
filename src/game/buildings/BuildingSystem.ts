@@ -6,6 +6,7 @@ import { Game } from "../Game";
 
 export class BuildingSystem extends GameSystem {
     private game: Game;
+    public name: string = 'Buildings';
     public buildings: Building[] = [];
     public constructor(game: Game) {
         super();

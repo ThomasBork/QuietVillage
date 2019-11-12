@@ -1,6 +1,6 @@
 import { Observable, ObservableFactory } from "../../common/Observable";
 
-export class GameSystem {
+export abstract class GameSystem {
     private _isUnlocked: boolean = false;
     public get isUnlocked(): boolean { return this._isUnlocked; };
     public set isUnlocked(value) { 
@@ -14,4 +14,5 @@ export class GameSystem {
     public onUnlocked: Observable = ObservableFactory.create();
     public update(dTime: number): void {}
     public init(): void {}
+    public abstract name: string;
 }

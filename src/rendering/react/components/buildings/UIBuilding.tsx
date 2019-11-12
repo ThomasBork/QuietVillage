@@ -6,7 +6,7 @@ interface BuildingLine {
     name: string,
     amount: number
 }
-export class UIBuildingLine extends React.Component<{game: Game, building: Building}, BuildingLine> {
+export class UIBuilding extends React.Component<{game: Game, building: Building}, BuildingLine> {
     public constructor (props: {game: Game, building: Building}) {
         super(props);
 

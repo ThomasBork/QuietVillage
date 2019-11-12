@@ -16,10 +16,24 @@ export class Resource {
     public onUnlocked: Observable = ObservableFactory.create();
     public amount: number = 0;
     public income: ValueContainer = new ValueContainer();
+    public cap: ValueContainer = new ValueContainer();
+    public hasCap: boolean;
     public name: string;
     public type: ResourceType;
-    public constructor(name: string, type: ResourceType) {
+    public constructor(name: string, type: ResourceType, initialCap?: number) {
         this.name = name;
         this.type = type;
+        if (initialCap === undefined) {
+            this.hasCap = false;
+        } else {
+            this.hasCap = true;
+            this.cap.setAdditiveModifier(this, initialCap);
+        }
+    }
+
+    public respectCap(): void {
+        if (this.hasCap && this.amount > this.cap.value) {
+            this.amount = this.cap.value;
+        }
     }
 }

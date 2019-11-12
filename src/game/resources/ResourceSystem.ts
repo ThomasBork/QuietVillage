@@ -4,17 +4,19 @@ import { ResourceType } from "./ResourceType";
 import { ResourceValue } from "./ResourceValue";
 
 export class ResourceSystem extends GameSystem {
+    public name: string = 'Resources';
     public resources: Resource[] = [];
     public resourceMap: Map<ResourceType, Resource> = new Map();
-    private addResourceType(name: string, type: ResourceType): void {
-        this.resources.push(new Resource(name, type));
+    public resourceCaps: ResourceValue[] = [];
+    private addResourceType(name: string, type: ResourceType, initialCap?: number): void {
+        this.resources.push(new Resource(name, type, initialCap));
     }
     public init(): void {
-        this.addResourceType("Food", ResourceType.Food);
-        this.addResourceType("Wood", ResourceType.Wood);
-        this.addResourceType("Stone", ResourceType.Stone);
-        this.addResourceType("Pelt", ResourceType.Pelt);
-        this.addResourceType("Gold", ResourceType.Gold);
+        this.addResourceType("Food", ResourceType.Food, 500);
+        this.addResourceType("Wood", ResourceType.Wood, 500);
+        this.addResourceType("Stone", ResourceType.Stone, 100);
+        this.addResourceType("Pelt", ResourceType.Pelt, 100);
+        this.addResourceType("Gold", ResourceType.Gold, 100);
         this.addResourceType("Devotion", ResourceType.Devotion);
 
         this.resources.forEach(resource => this.resourceMap.set(resource.type, resource));
@@ -26,6 +28,7 @@ export class ResourceSystem extends GameSystem {
         this.resources.forEach(resource => {
             const dAmount = resource.income.value * dTime / 1000;
             resource.amount += dAmount;
+            resource.respectCap();
         });
     }
     public hasResources(resourceValues: ResourceValue[]): boolean {
@@ -40,7 +43,7 @@ export class ResourceSystem extends GameSystem {
             resource.amount -= resourceValue.value.value;
         });
     }
-    public refreshResourcesIsUnlocked() {
+    public refreshResourcesIsUnlocked(): void {
         this.resourceMap.get(ResourceType.Food).isUnlocked = true;
         this.resourceMap.get(ResourceType.Wood).isUnlocked = true;
     }

@@ -9,6 +9,7 @@ import { ValueContainer } from "../shared/ValueContainer";
 export class WorkerSystem extends GameSystem {
     private game: Game;
 
+    public name: string = 'Workers';
     public idleWorkerCount: number;
     public totalWorkerCount: ValueContainer;
     public onIdleWorkerCountChange: ObservableWith1Argument<number>;

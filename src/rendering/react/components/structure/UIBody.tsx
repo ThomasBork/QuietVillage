@@ -1,22 +1,43 @@
 import React = require("react");
 import { Game } from "../../../../game/Game";
 import { UIJobList } from "../workers/UIJobList";
-import { UIBuildingList } from "../buildings/UIBuildingList";
-import { UIResourceList } from "../resources/UIResourceList";
+import { UIBuildings } from "../buildings/UIBuildings";
+import { UIResources } from "../resources/UIResources";
+import { UIGameSystemTabs } from "./UIGameSystemTabs";
+import { GameSystem } from "../../../../game/shared/GameSystem";
 
-export class UIBody extends React.Component<{game: Game}> {
+export class UIBody extends React.Component<{game: Game},{selectedGameSystem: GameSystem}> {
+    // public constructor(props:{game: Game}) {
+    //     super(props);
+    //     this.state = {selectedGameSystem: props.game.workerSystem};
+    // }
+    private renderGameSystem(): JSX.Element {
+        if (!this.state || !this.state.selectedGameSystem || !this.state.selectedGameSystem.isUnlocked) {
+            return null;
+        }
+
+        switch(this.state.selectedGameSystem) {
+            case this.props.game.buildingSystem:
+                return <UIBuildings game={this.props.game}></UIBuildings>
+            case this.props.game.workerSystem:
+                return <UIJobList game={this.props.game}></UIJobList>
+            default: 
+                return null;
+        }
+    }
     public render(): JSX.Element {
         return (
             <div id="body">
-                <span>
-                    <UIJobList game={this.props.game}></UIJobList>
-                    {
-                        this.props.game.buildingSystem.isUnlocked 
-                        ? <UIBuildingList game={this.props.game}></UIBuildingList> 
-                        : null 
-                    }
+                <span id="tabs-and-tab-content-container">
+                    <UIGameSystemTabs 
+                        game={this.props.game} 
+                        onSelected={(system: GameSystem)=>this.setState({selectedGameSystem:system})}
+                    ></UIGameSystemTabs>
+                    <span id="tab-content">
+                        {this.renderGameSystem()}
+                    </span>
                 </span>
-                <UIResourceList game={this.props.game}></UIResourceList>
+                <UIResources game={this.props.game}></UIResources>
             </div>
         );
     }

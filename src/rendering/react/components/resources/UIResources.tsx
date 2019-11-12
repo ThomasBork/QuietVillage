@@ -1,9 +1,9 @@
 import * as React from "react";
 import { Game } from "../../../../game/Game";
-import { UIResourceLine } from "./UIResourceLine";
+import { UIResource } from "./UIResource";
 import { Resource } from "../../../../game/resources/Resource";
 
-export class UIResourceList extends React.Component<{game: Game}, {resources: Resource[]}> {
+export class UIResources extends React.Component<{game: Game}, {resources: Resource[]}> {
     constructor (props: {game: Game}) {
         super(props);
 
@@ -21,7 +21,7 @@ export class UIResourceList extends React.Component<{game: Game}, {resources: Re
         return (
             <ul id="resource-list">
             {this.state.resources.map((resource) => 
-                <UIResourceLine key={resource.name} resource={resource}></UIResourceLine>
+                <UIResource key={resource.name} resource={resource}></UIResource>
             )}
             </ul>
         );
