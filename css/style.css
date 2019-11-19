@@ -14,6 +14,17 @@ body {
     justify-content: space-between;
 }
 
+.flexbox-column {
+    display: flex;
+    flex-direction: column;
+}
+
+.flexbox-column-between {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
 .button {
     background-color: #6060ff;
     display: inline-block;
@@ -26,6 +37,18 @@ body {
 
 ul {
     list-style: none;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 10px;
+    background-color: black;
+    border: 1px solid grey;
+}
+.progress-bar .bar {
+    height: 100%;
+    background-color: #6060ff;
+    display: block;
 }
 
 /* Header */

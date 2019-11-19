@@ -1,13 +1,14 @@
 import { GameSystem } from "../shared/GameSystem";
 import { Resource } from "./Resource";
 import { ResourceType } from "./ResourceType";
+import { ResourceValueContainer } from "./ResourceValueContainer";
 import { ResourceValue } from "./ResourceValue";
 
 export class ResourceSystem extends GameSystem {
     public name: string = 'Resources';
     public resources: Resource[] = [];
     public resourceMap: Map<ResourceType, Resource> = new Map();
-    public resourceCaps: ResourceValue[] = [];
+    public resourceCaps: ResourceValueContainer[] = [];
     private addResourceType(name: string, type: ResourceType, initialCap?: number): void {
         this.resources.push(new Resource(name, type, initialCap));
     }
@@ -34,13 +35,13 @@ export class ResourceSystem extends GameSystem {
     public hasResources(resourceValues: ResourceValue[]): boolean {
         return resourceValues.every(resourceValue => {
             const resource = this.getResource(resourceValue.resourceType);
-            return resource.amount >= resourceValue.value.value;
+            return resource.amount >= resourceValue.value;
         });
     }
     public payResources(resourceValues: ResourceValue[]): void {
         return resourceValues.forEach(resourceValue => {
             const resource = this.getResource(resourceValue.resourceType);
-            resource.amount -= resourceValue.value.value;
+            resource.amount -= resourceValue.value;
         });
     }
     public refreshResourcesIsUnlocked(): void {

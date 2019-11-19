@@ -16,7 +16,7 @@ export class Game {
     public resourceSystem: ResourceSystem;
     public workerSystem: WorkerSystem;
 
-    public onUpdated: Observable = ObservableFactory.create();
+    public onUpdate: Observable = ObservableFactory.create();
 
     public static new(): Game {
         const game = new Game();
@@ -69,11 +69,12 @@ export class Game {
             this.updateGameSystems(this.updateFrequency);
         }
 
-        this.onUpdated.notify();
+        this.onUpdate.notify();
     }
 
     private updateGameSystems (dTime: number): void {        
         this.resourceSystem.update(dTime);
+        this.buildingSystem.update(dTime);
     }
 
     private refreshSystemsIsUnlocked() {

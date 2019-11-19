@@ -10,7 +10,10 @@ export class UIBuildings extends React.Component<{game: Game}> {
         return (
             <ul>
             {this.props.game.buildingSystem.buildings.map((building) => 
-                <UIBuilding key={building.name} game={this.props.game} building={building}>
+                <UIBuilding 
+                    key={building.name} 
+                    game={this.props.game} 
+                    building={building}>
                 </UIBuilding>
             )}
             </ul>

@@ -1,8 +1,9 @@
 import { GameSystem } from "../shared/GameSystem";
 import { Building } from "./Building";
-import { ResourceValue } from "../resources/ResourceValue";
+import { ResourceValueContainer } from "../resources/ResourceValueContainer";
 import { ResourceType } from "../resources/ResourceType";
 import { Game } from "../Game";
+import { ResourceValue } from "../resources/ResourceValue";
 
 export class BuildingSystem extends GameSystem {
     private game: Game;
@@ -18,30 +19,53 @@ export class BuildingSystem extends GameSystem {
         baseCost: ResourceValue[],
         additiveCostPerBuilding: ResourceValue[],
         multiplicativeCostPerBuilding: ResourceValue[],
+        baseTimeToBuild: number,
+        additiveTimeToBuildPerBuilding: number,
+        multiplicativeTimeToBuildPerBuilding: number,
         onUpdateAmount: (thisBuilding: Building) => void
     ): void {
-        this.buildings.push(new Building(name, description, baseCost, additiveCostPerBuilding, multiplicativeCostPerBuilding, onUpdateAmount));
-    }
-    private buildResourceValues(...resourceValueInput: [ResourceType, number][]): ResourceValue[] {
-        return resourceValueInput.map(input => new ResourceValue(input[0], input[1]));
+        this.buildings.push(
+            new Building(
+                name, 
+                description, 
+                baseCost, 
+                additiveCostPerBuilding, 
+                multiplicativeCostPerBuilding, 
+                baseTimeToBuild,
+                additiveTimeToBuildPerBuilding,
+                multiplicativeTimeToBuildPerBuilding,
+                onUpdateAmount));
     }
     public init(): void {
         this.addBuilding(
             'Hut', 
             'Allows another worker to join your village',
-            this.buildResourceValues([ResourceType.Wood, 100]),
-            this.buildResourceValues([ResourceType.Wood, 20]),
-            this.buildResourceValues([ResourceType.Wood, 1.2]),
+            ResourceValue.fromArray([ResourceType.Wood, 100]),
+            ResourceValue.fromArray([ResourceType.Wood, 20]),
+            ResourceValue.fromArray([ResourceType.Wood, 1.2]),
+            1000,
+            500,
+            null,
             (thisBuilding: Building): void => {
               this.game.workerSystem.totalWorkerCount.setAdditiveModifier(thisBuilding, thisBuilding.amount);
             }
         );
     }
     public buyBuilding(building: Building): void {
-        const cost = building.getCostOfNextBuilding();
-        if (this.game.resourceSystem.hasResources(cost)) {
-            this.game.resourceSystem.payResources(cost);
-            building.incrementAmount();
+        const costOfNext = building.costOfNext.getAllAsResourceValues();
+        if (this.game.resourceSystem.hasResources(costOfNext)) {
+            this.game.resourceSystem.payResources(costOfNext);
+            building.startBuilding();
         }
+    }
+    public update(dTime: number): void {
+        this.buildings.forEach(building => {
+            if (building.isBuildingNext) {
+                building.buildTimeRemaining -= dTime;
+                if (building.buildTimeRemaining <= 0) {
+                    building.finishBuilding();
+                }
+            }
+        });
     }
 }

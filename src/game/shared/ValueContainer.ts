@@ -15,6 +15,11 @@ export class ValueContainer {
     private multiplicativeModifiers: ValueModifier[] = [];
     public value = 0;
     public onValueChange: ObservableWith1Argument<number> = ObservableFactory.createWith1Argument<number>();
+    public constructor (baseValue?: number) {
+        if (baseValue !== undefined) {
+            this.setAdditiveModifier(this, baseValue);
+        }
+    }
     public recalculateValue (): void {
         let newValue = 0;
         this.additiveModifiers.forEach(mod => newValue += mod.amount);

@@ -12,7 +12,7 @@ export class UIResources extends React.Component<{game: Game}, {resources: Resou
 
         this.state = {resources: getResources()};
 
-        this.props.game.onUpdated.addSubscription(
+        this.props.game.onUpdate.addSubscription(
             this, 
             () => this.setState({resources: getResources()})
         );
