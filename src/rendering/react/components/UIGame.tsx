@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Game } from "../../../game/Game";
 import { UIResources } from "./resources/UIResources";
-import { UIJobList } from "./workers/UIJobList";
+import { UIWorkerSystem } from "./workers/UIWorkerSystem";
 import { GameContext } from "./UIGameContext";
 import { UIBuildings } from "./buildings/UIBuildings";
 import { UIHeader } from "./structure/UIHeader";

@@ -1,6 +1,6 @@
 import React = require("react");
 import { Game } from "../../../../game/Game";
-import { UIJobList } from "../workers/UIJobList";
+import { UIWorkerSystem } from "../workers/UIWorkerSystem";
 import { UIBuildings } from "../buildings/UIBuildings";
 import { UIResources } from "../resources/UIResources";
 import { UIGameSystemTabs } from "./UIGameSystemTabs";
@@ -20,7 +20,7 @@ export class UIBody extends React.Component<{game: Game},{selectedGameSystem: Ga
             case this.props.game.buildingSystem:
                 return <UIBuildings game={this.props.game}></UIBuildings>
             case this.props.game.workerSystem:
-                return <UIJobList game={this.props.game}></UIJobList>
+                return <UIWorkerSystem game={this.props.game}></UIWorkerSystem>
             default: 
                 return null;
         }
