@@ -1,0 +1,50 @@
+@import "colors.scss";
+
+.flexbox {
+    display: flex;
+}
+
+.flexbox-between {
+    display: flex;
+    justify-content: space-between;
+}
+
+.flexbox-column {
+    display: flex;
+    flex-direction: column;
+}
+
+.flexbox-column-between {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.button {
+    background-color: $blue;
+    border: 2px solid $grey;
+    display: inline-block;
+    padding-left: 15px;
+    padding-right: 15px;
+    cursor: pointer;
+}
+
+.large-list-card {
+    background-color: $brown;
+    border: 2px solid $grey;
+    min-height: 150px;
+    width: 600px;
+    margin-bottom: 5px;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 10px;
+    background-color: $black;
+    border: 1px solid $grey;
+}
+.progress-bar .bar {
+    height: 100%;
+    background-color: $blue;
+    display: block;
+}

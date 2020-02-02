@@ -1,0 +1,25 @@
+#worker-system {
+    .job {
+        display: flex;
+        padding: 10px;
+        
+        .name-and-image-container {
+            width: 100px;
+            height: 100px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .description-and-slider-container {
+            flex: 1 1 auto;
+            display: flex;
+            align-items: center;
+        }
+        .description {
+            flex: 1 1 0;
+        }
+        .slider {
+            flex: 1 1 0;
+        }
+    }
+}

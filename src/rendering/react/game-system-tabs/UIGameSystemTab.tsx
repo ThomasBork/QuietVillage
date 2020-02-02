@@ -1,5 +1,5 @@
 import React = require("react");
-import { GameSystem } from "../../../../game/shared/GameSystem";
+import { GameSystem } from "../../../game/shared/GameSystem";
 
 export class UIGameSystemTab extends React.Component<{gameSystem: GameSystem, isSelected: boolean, onSelected: () => void}> {
     public render(): JSX.Element {

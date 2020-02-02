@@ -1,6 +1,6 @@
 import * as React from "react";
 import { UIJob } from "./UIJob";
-import { Game } from "../../../../game/Game";
+import { Game } from "../../../game/Game";
 
 interface _State {
     idleWorkerCount: number
@@ -21,8 +21,8 @@ export class UIWorkerSystem extends React.Component<{game: Game}, _State> {
     }
     render() {
         return (
-            <div>
-                <div className="job">
+            <div id="worker-system">
+                <div className="job large-list-card">
                     <span className="name-and-image-container">
                         <span>Idle({this.state.idleWorkerCount})</span>
                         <img src={`./img/worker/jobs/idle.png`} />

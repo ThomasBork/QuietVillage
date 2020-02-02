@@ -1,6 +1,6 @@
 import * as React from "react";
-import { NumberFormatter } from "../../../../common/NumberFormatter";
-import { Resource } from "../../../../game/resources/Resource";
+import { NumberFormatter } from "../../../common/NumberFormatter";
+import { Resource } from "../../../game/resources/Resource";
 
 export class UIResource extends React.Component<{resource: Resource}> {
     render() {

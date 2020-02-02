@@ -1,11 +1,8 @@
 import * as React from "react";
-import { Game } from "../../../game/Game";
-import { UIResources } from "./resources/UIResources";
-import { UIWorkerSystem } from "./workers/UIWorkerSystem";
+import { Game } from "../../game/Game";
 import { GameContext } from "./UIGameContext";
-import { UIBuildings } from "./buildings/UIBuildings";
-import { UIHeader } from "./structure/UIHeader";
-import { UIBody } from "./structure/UIBody";
+import { UIHeader } from "./UIHeader";
+import { UIBody } from "./UIBody";
 
 export class UIGame extends React.Component<{}, {game: Game}> {
     constructor (props: {game: Game}) {
@@ -21,7 +18,7 @@ export class UIGame extends React.Component<{}, {game: Game}> {
     render() {
         return (
             <div>
-                <UIHeader versionNumber={'0.0.1'} onNewGameClick={()=>this.newGame()}></UIHeader>
+                <UIHeader versionNumber={'0.0.2'} onNewGameClick={()=>this.newGame()}></UIHeader>
                 {
                     this.state.game
                     ? 

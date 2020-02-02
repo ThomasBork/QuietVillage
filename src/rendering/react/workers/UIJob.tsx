@@ -1,6 +1,6 @@
 import * as React from "react";
-import { Job } from "../../../../game/workers/Job";
-import { Game } from "../../../../game/Game";
+import { Job } from "../../../game/workers/Job";
+import { Game } from "../../../game/Game";
 
 interface _State {
     workerCount: number,
@@ -26,15 +26,17 @@ export class UIJob extends React.Component<{game: Game, job: Job}, _State> {
                 this.setState({totalWorkerCount: newTotalWorkerCount}));
     }
     private setWorkers(newWorkerCount: number): void {
-        // Only try to update worker count, if there are enough workers
-        if(this.props.job.workerCount + this.props.game.workerSystem.idleWorkerCount >= newWorkerCount) {
+        const maximumWorkers = this.props.job.workerCount + this.props.game.workerSystem.idleWorkerCount;
+        if(maximumWorkers >= newWorkerCount) {
             this.props.game.workerSystem.setWorkerCountOnJob(this.props.job, newWorkerCount);
+        } else {
+            this.props.game.workerSystem.setWorkerCountOnJob(this.props.job, maximumWorkers);
         }
     }
     public render(): JSX.Element {
         return (
             <li key={this.props.job.name}>
-                <div className="job">
+                <div className="job large-list-card">
                     <span className="name-and-image-container">
                         <span>{this.props.job.name}({this.state.workerCount})</span>
                         <img src={`./img/worker/jobs/${this.props.job.name.toLowerCase()}.png`} />

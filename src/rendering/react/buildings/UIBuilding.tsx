@@ -1,6 +1,6 @@
 import * as React from "react";
-import { Game } from "../../../../game/Game";
-import { Building } from "../../../../game/buildings/Building";
+import { Game } from "../../../game/Game";
+import { Building } from "../../../game/buildings/Building";
 import { UIBuildingCost } from "./UIBuildingCost";
 import { UIProgressBar } from "../shared/UIProgressBar";
 
@@ -27,7 +27,7 @@ export class UIBuilding extends React.Component<{game: Game, building: Building}
     }
     public render(): JSX.Element {
         return (
-            <li key={this.props.building.name} className="building">
+            <li key={this.props.building.name} className="building large-list-card">
                 <span className="name-and-image-container">
                     <span className="name">{this.props.building.name + this.getAmountText()}</span>
                     <img src={`./img/buildings/${this.props.building.name.toLocaleLowerCase()}.png`} />

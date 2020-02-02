@@ -1,7 +1,7 @@
 import * as React from "react";
-import { Building } from "../../../../game/buildings/Building";
+import { Building } from "../../../game/buildings/Building";
 import { GameContext } from "../UIGameContext";
-import { NumberFormatter } from "../../../../common/NumberFormatter";
+import { NumberFormatter } from "../../../common/NumberFormatter";
 
 export class UIBuildingCost extends React.Component<{building: Building, onClick: () => void}> {
     public constructor (props: {building: Building, onClick: () => void}) {
@@ -17,7 +17,7 @@ export class UIBuildingCost extends React.Component<{building: Building, onClick
         return (
             <GameContext.Consumer>
             {game => 
-                <ul className="resources" onClick={this.props.onClick}>
+                <ul className="resources button" onClick={this.props.onClick}>
                     {this.props.building.costOfNext.getAll().map(resourceValue => 
                         <li className="resource" key={resourceValue.resourceType}>
                             <span className="type">{game.resourceSystem.getResource(resourceValue.resourceType).name}</span>

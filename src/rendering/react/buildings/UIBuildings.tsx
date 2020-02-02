@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Game } from "../../../../game/Game";
+import { Game } from "../../../game/Game";
 import { UIBuilding } from "./UIBuilding";
 
 export class UIBuildings extends React.Component<{game: Game}> {

@@ -1,0 +1,8 @@
+#resources {
+    width: 300px;
+
+    > li {
+        display: flex;
+        justify-content: space-between;
+    }
+}

@@ -1,16 +1,12 @@
 import React = require("react");
-import { Game } from "../../../../game/Game";
-import { UIWorkerSystem } from "../workers/UIWorkerSystem";
-import { UIBuildings } from "../buildings/UIBuildings";
-import { UIResources } from "../resources/UIResources";
-import { UIGameSystemTabs } from "./UIGameSystemTabs";
-import { GameSystem } from "../../../../game/shared/GameSystem";
+import { Game } from "../../game/Game";
+import { UIWorkerSystem } from "./workers/UIWorkerSystem";
+import { UIBuildings } from "./buildings/UIBuildings";
+import { UIResources } from "./resources/UIResources";
+import { UIGameSystemTabs } from "./game-system-tabs/UIGameSystemTabs";
+import { GameSystem } from "../../game/shared/GameSystem";
 
 export class UIBody extends React.Component<{game: Game},{selectedGameSystem: GameSystem}> {
-    // public constructor(props:{game: Game}) {
-    //     super(props);
-    //     this.state = {selectedGameSystem: props.game.workerSystem};
-    // }
     private renderGameSystem(): JSX.Element {
         if (!this.state || !this.state.selectedGameSystem || !this.state.selectedGameSystem.isUnlocked) {
             return null;

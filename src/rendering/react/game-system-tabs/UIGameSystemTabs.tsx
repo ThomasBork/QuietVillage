@@ -1,6 +1,6 @@
 import React = require("react");
-import { Game } from "../../../../game/Game";
-import { GameSystem } from "../../../../game/shared/GameSystem";
+import { Game } from "../../../game/Game";
+import { GameSystem } from "../../../game/shared/GameSystem";
 import { UIGameSystemTab } from "./UIGameSystemTab";
 
 export class UIGameSystemTabs extends React.Component<{game: Game, onSelected: (system: GameSystem)=>void}> {

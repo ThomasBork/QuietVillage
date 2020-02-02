@@ -1,0 +1,17 @@
+@import "../colors.scss";
+
+#tabs {
+    .tab.selected {
+        border: 2px solid $grey;
+    }
+
+    .tab {
+        border: 2px solid #555555;
+        display: flex;
+        flex-direction: column;
+        padding: 10px;
+        margin-bottom: 5px;
+        background-color: $brown;
+        align-items: center;
+    }
+}
