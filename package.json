@@ -28,7 +28,7 @@
   },
   "dependencies": {
     "css-loader": "^3.2.1",
-    "node-sass": "^4.13.0",
+    "node-sass": "^4.13.1",
     "react": "^16.10.2",
     "react-dom": "^16.10.2",
     "sass-loader": "^8.0.0",
